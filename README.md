@@ -14,4 +14,12 @@ This repository contains a Python implementation of two heuristic algorithms for
 - Simple and clear Python code for both algorithms
 - Configurable parameters:
   - Temperature, cooling rate, and stopping criteria for Simulated Annealing
-  - Population size, number of generations, crossover/mutation rates for the Genetic Algorithm
+  - Population size, number of generations and mutation rates for the Genetic Algorithm
+
+## Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/caiqfrrz/tsp-heuristic-solvers.git
+cd tsp-heuristic-solvers
+```
