@@ -38,7 +38,7 @@ pip install -r requirements.txt
 
 Adjust parameters in the script or modify the function call:
 
-```bash
+```python
 best_solution, best_cost, progress = simulated_annealing(
                                         cities,
                                         temperature,
@@ -52,7 +52,7 @@ best_solution, best_cost, progress = simulated_annealing(
 
 Adjust parameters:
 
-```bash
+```python
 best_solution, best_cost, progress = genetic_algorithm(
                                         cities,
                                         population_size=100,
