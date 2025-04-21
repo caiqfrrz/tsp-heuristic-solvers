@@ -1,5 +1,6 @@
 import random
 import math
+import time
 
 from utils import calculate_total_distance
 
@@ -26,14 +27,19 @@ def mutate(route, mutation_rate):
         i, j = random.sample(range(len(route)), 2)
         route[i], route[j] = route[j], route[i]
 
-def genetic_algorithm(cities, population_size=100, generations=1000, mutation_rate=0.01):
+def genetic_algorithm(cities, population_size=100, generations=1000, mutation_rate=0.01, time_budget=5.0):
+    start = time.perf_counter()
+
     n = len(cities)
     population = initial_population(population_size, n)
 
     best = min(population, key=lambda x: calculate_total_distance(cities, x))
     best_cost = calculate_total_distance(cities, best)
 
-    for gen in range(generations):
+    progress = [(0, best_cost)]  # Track (time, best_cost) pairs
+
+    generation = 0
+    while generation < generations and (time.perf_counter() - start) < time_budget:
         new_population = []
         population_sorted = sorted(population, key=lambda x: calculate_total_distance(cities, x))
         new_population.extend(population_sorted[:2])
@@ -60,4 +66,10 @@ def genetic_algorithm(cities, population_size=100, generations=1000, mutation_ra
             best = current_best
             best_cost = current_cost
 
-    return best, best_cost
+        # Record the current best cost and elapsed time
+        elapsed_time = time.perf_counter() - start
+        progress.append((elapsed_time, best_cost))
+
+        generation += 1
+
+    return best, best_cost, progress
